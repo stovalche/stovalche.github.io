@@ -35,51 +35,119 @@
       }, 0);
     });
   </script>
-
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
   <div id="vanta"></div>
   <main>
-    <header>
-      <img src="./images/profile.jpg" />
-      <h1>@3bdmalik_</h1>
-    </header>
-    <ul>
-      <li>
-        <a href="">
-          <img src="images/overview.png" alt="Overview" width="10" />
-          Overview
-        </a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/in/abd-malik-syamlan-08600a21a">
-          <img src="images/linkedinbg.png" alt="LinkedIn" width="10" />
-          LinkedIn
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/stovalche">
-          <img src="./images/gitbg.png" alt="GitHub" width="10" />
-          GitHub
-        </a>
-      </li>
-      <li>
-        <a href="https://www.instagram.com/3bdmalik_/">
-          <img src="images/igbg.png" alt="Instagram" width="10" />
-          Instagram
-        </a>
-      </li>
-    </ul>
+    <section id="linksPage">
+      <header>
+        <img src="./images/profile.jpg" />
+        <h1>@3bdmalik_</h1>
+      </header>
+      <ul>
+        <li>
+          <a href="#" id="overviewBtn">
+            <img src="images/overview.png" alt="Overview" width="10" />
+            Overview
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/abd-malik-syamlan-08600a21a">
+            <img src="images/linkedinbg.png" alt="LinkedIn" width="10" />
+            LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/stovalche">
+            <img src="./images/gitbg.png" alt="GitHub" width="10" />
+            GitHub
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/3bdmalik_/">
+            <img src="images/igbg.png" alt="Instagram" width="10" />
+            Instagram
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="overviewPage" class="hidden">
+      <header class="overviewHeader">
+        <button class="back-btn" id="backBtn">
+          <a href="">Back</a>
+        </button>
+        <div>
+          <img src="images/profile.jpg">
+          <h1>@3bdmalik_</h1>
+        </div>
+      </header>
+      <div>
+        <h1>💠 Development Environment</h1>
+        <p>
+          My development environment for both app and web development is built entirely on Linux. I primarily
+          use Neovim as my text editor, fish as my interactive shell, and Alacritty as my terminal emulator. This setup
+          provides a highly customizable and efficient workflow tailored for productivity and simplicity.
+          The complete configuration files and setup details can be found in my public dotfiles repository
+          <a href="https://github.com/stovalche/dotfiles-public.git">dotfiles-public-link</a>.
+        </p>
+        <img src="images/devenv1.png" alt="">
+        <img src="images/devenv2.png" alt="">
+        <div></div>
+        <h1>💠 Linux Rice</h1>
+        <p>
+          The current operating system is Arch Linux, running on Wayland as the display server. To manage windows and
+          compositing, I use Hyprland, which combines tiling window management features with smooth graphical effects.
+          Several additional packages are included to complement the desktop environment:
+          waybar – a customizable status bar for Wayland,
+          mako – a lightweight notification daemon,
+          rofi-wayland – an application launcher optimized for Wayland.
+        </p>
+        <img src="images/linuxrice1.png" alt="">
+        <img src="images/linuxrice2.png" alt="">
+        <p>
+          For more details, including projects or configuration files, please refer to my github
+          <a href="https://github.com/stovalche/">github-link</a>!
+        </p>
+      </div>
+    </section>
   </main>
+
   <script>
+    const linksPage = document.getElementById("linksPage");
+    const overviewPage = document.getElementById("overviewPage");
+    const overviewBtn = document.getElementById("overviewBtn");
+    const backBtn = document.getElementById("backBtn");
+
+    overviewBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      linksPage.classList.add("hidden");
+      overviewPage.classList.remove("hidden");
+    });
+
+    backBtn.addEventListener("click", () => {
+      overviewPage.classList.add("hidden");
+      linksPage.classList.remove("hidden");
+    });
+  </script>
+
+  <script>
+    // Musik interlude (kodemu tetap dipertahankan)
+    let audioCtx;
+    let source;
     window.addEventListener("load", async () => {
       try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const response = await fetch("interlude.mpeg");
         const arrayBuffer = await response.arrayBuffer();
         const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
-        const source = audioCtx.createBufferSource();
+        source = audioCtx.createBufferSource();
 
         source.buffer = audioBuffer;
         source.connect(audioCtx.destination);
@@ -87,6 +155,15 @@
         source.stop(audioCtx.currentTime + 31);
       } catch (err) {
         console.log("❌ Autoplay Error:", err);
+      }
+    });
+    window.addEventListener("beforeunload", () => {
+      if (source) {
+        try {
+          source.stop();
+          audioCtx.close();
+          console.log("⏹ Stop the audio due to closing tab!");
+        } catch { }
       }
     });
   </script>

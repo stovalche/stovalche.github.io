@@ -5,6 +5,27 @@ main {
   transition: opacity 2s ease-in-out, filter 2s ease-in-out;
 }
 
+section {
+  position: relative;
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+section {
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity 2s ease-in-out, filter 2s ease-in-out;
+}
+
 body,
 html {
   margin: 0;
@@ -16,6 +37,103 @@ html {
 body {
   background: url(./images/bg.jpg) repeat center center fixed;
   background-size: cover;
+}
+
+.overviewHeader {
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5%;
+}
+
+.overviewHeader>div {
+  background-color: #000a;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  backdrop-filter: blur(0.1px) saturate(200%) contrast(180%);
+  -webkit-backdrop-filter: blur(0.1px) saturate(200%) contrast(180%);
+  border-radius: 10em;
+  border: 1px solid #000a;
+  box-shadow: #000a 2px 8px 8px 0px;
+}
+
+.overviewHeader>div>img {
+  border-radius: 100px;
+  width: 30px;
+  height: 30px;
+}
+
+.overviewHeader>div>h1 {
+  font-size: 0.8em;
+  font-weight: normal;
+  margin: 0 0.5em 0 0.5em;
+  color: #a0a0a0;
+}
+
+#overviewPage>div {
+  background-color: #000a;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  backdrop-filter: blur(0.1px) saturate(200%) contrast(180%);
+  -webkit-backdrop-filter: blur(0.1px) saturate(200%) contrast(180%);
+  border-radius: 1em;
+  padding: 5%;
+  margin: 5%;
+  border: 1px solid #000a;
+  box-shadow: #000a 2px 8px 8px 0px;
+}
+
+#overviewPage>div>p {
+  margin: 0 0 0.5em 0;
+  font-size: 0.8em;
+  font-weight: normal;
+  color: #a0a0a0;
+}
+
+#overviewPage>div>h1 {
+  margin: 0 0 0.5em 0;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #a0a0a0;
+}
+
+#overviewPage>div>p>a {
+  font-size: 0.9em;
+  color: #268bd2;
+}
+
+#overviewPage>div>img {
+  margin: 0 0 0.5em 0;
+}
+
+#overviewPage>div>div {
+  margin: 0.8em
+}
+
+button {
+  cursor: pointer;
+  background-color: #000a;
+  backdrop-filter: blur(0.1px) saturate(200%) contrast(180%);
+  -webkit-backdrop-filter: blur(0.1px) saturate(200%) contrast(180%);
+  border-radius: 10em;
+  margin: 0 1em 0 0;
+  border: 1px solid #000a;
+  box-shadow: #000a 2px 8px 8px 0px;
+}
+
+button>a {
+  height: 0.8em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6em 0.6em;
+  gap: 0.5em;
+  color: #a0a0a0;
+  font-size: 1em;
 }
 
 header {
@@ -38,10 +156,10 @@ header>h1 {
   display: inline-block;
   font-size: 0.8em;
   font-weight: bold;
-  border-radius: 1em;
+  border-radius: 10em;
   background-color: #000a;
   color: #a0a0a0;
-  padding: 0.3em 0.6em;
+  padding: 0.6em 0.6em;
   border: 1px solid #000a;
   box-shadow: #000a 2px 8px 8px 0px;
 }
